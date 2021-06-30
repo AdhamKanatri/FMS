@@ -2,7 +2,7 @@
     package="com.example.test_fms">
    <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="test_fms"
+        android:label="Finishing"
         android:icon="@mipmap/ic_launcher">
         <activity
            android:name=".MainActivity"

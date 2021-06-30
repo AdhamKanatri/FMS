@@ -75,6 +75,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, HomePage.id);
+                            },
+                            child: Text(
+                              "Skip",
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ]
+                      ),
                       CustomLogo(),
                       SizedBox(
                         height: high * 0.02,

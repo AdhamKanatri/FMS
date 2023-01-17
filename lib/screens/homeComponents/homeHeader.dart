@@ -6,6 +6,7 @@ import 'iconBtnWithCounter.dart';
 import 'searchField.dart';
 
 class HomeHeader extends StatelessWidget {
+  static List searchList;
   const HomeHeader({
     Key key,
   }) : super(key: key);
@@ -26,10 +27,33 @@ class HomeHeader extends StatelessWidget {
           IconBtnWithCounter(
             icon: Icons.notifications,
             numOfitem: 0,
-            press: () {},
+            press: () => showCustomDialog(context),
           ),
         ],
       ),
     );
   }
+  void showCustomDialog(BuildContext context) => showDialog(
+    context: context,
+    builder: (BuildContext context){
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 12),
+                  Text(
+                    'No notifications',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+  );
 }

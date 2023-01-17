@@ -94,12 +94,12 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             width: double.infinity,
             height: getProportionateScreenHeight(56),
             // ignore: deprecated_member_use
-            child: FlatButton(
+            child: MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
               onPressed: () {
                 if (_formKey.currentState.validate()) {
-                  Scaffold.of(context)
+                  ScaffoldMessenger.of(context)
                       .showSnackBar(SnackBar(content: Text('Pleas, check your email')));
                 }
               },

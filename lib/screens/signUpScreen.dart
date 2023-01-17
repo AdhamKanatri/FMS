@@ -137,7 +137,7 @@ class SignUpScreen extends StatelessWidget {
                               builder: (context) => SizedBox(
                                 width: double.infinity,
                                 height: getProportionateScreenHeight(56),
-                                child: FlatButton(
+                                child: MaterialButton(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(40)),
                                   onPressed: () async {
@@ -155,7 +155,7 @@ class SignUpScreen extends StatelessWidget {
                                         print(authResult.user.uid);
                                       } on PlatformException catch (ex) {
                                         modalHud.changeisLoading(false);
-                                        Scaffold.of(context).showSnackBar(
+                                        ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(content: Text(ex.message)));
                                       } //End catch
                                       modalHud.changeisLoading(false);
@@ -243,7 +243,7 @@ class SignUpScreen extends StatelessWidget {
       await _auth.signInWithGoogle();
       Navigator.popAndPushNamed(context, HomePage.id);
     } on PlatformException catch (ex) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text(ex.message)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(ex.message)));
     }
   }
 }
@@ -251,7 +251,7 @@ class SignUpScreen extends StatelessWidget {
       home: SecondScreen(),
       duration: 5000,
       imageSize: 100,
-      imageSrc: "logo.png",
+      imageSrc: "ogo.png",
       text: "Colorize Text",
       textType: TextType.ColorizeAnimationText,
       textStyle: TextStyle(

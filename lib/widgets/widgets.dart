@@ -164,7 +164,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return MaterialButton(
       shape: new RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(10.0),
       ),
@@ -258,7 +258,7 @@ class CustomButtonSocial extends StatelessWidget {
         borderRadius: BorderRadius.circular(11),
         color: Colors.grey.shade50,
       ),
-      child: FlatButton(
+      child: MaterialButton(
         onPressed: onPress,
         shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(10.0),

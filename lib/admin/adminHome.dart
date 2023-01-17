@@ -49,11 +49,11 @@ class _AdminHomeState extends State<AdminHome> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text("Orders")),
+              icon: Icon(Icons.person), label: "Orders"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text("My Profile")),
+              icon: Icon(Icons.person), label: "My Profile"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.logout), title: Text("Sign out")),
+              icon: Icon(Icons.logout), label: "Sign out"),
         ],
       ),
       body: CustomPaint(
@@ -73,7 +73,7 @@ class _AdminHomeState extends State<AdminHome> {
               ),
               Icon(Icons.add_business_sharp,color: Colors.amber, size: getProportionateScreenHeight(50),),
               // ignore: deprecated_member_use
-              RaisedButton(
+              MaterialButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AddProduct.id);
                 },
@@ -84,7 +84,7 @@ class _AdminHomeState extends State<AdminHome> {
               ),
               Icon(Icons.edit,color: Colors.amber,size: getProportionateScreenHeight(50),),
               // ignore: deprecated_member_use
-              RaisedButton(
+              MaterialButton(
                 onPressed: () {
                   Navigator.pushNamed(context, manageProduct.id);
                 },
@@ -95,7 +95,7 @@ class _AdminHomeState extends State<AdminHome> {
               ),
               Icon(Icons.view_agenda_outlined,color: Colors.amber,size: getProportionateScreenHeight(50),),
               // ignore: deprecated_member_use
-              RaisedButton(
+              MaterialButton(
                 onPressed: () {
                   Navigator.pushNamed(context, OrderScreen.id);
                 },

@@ -11,6 +11,7 @@ import 'package:test_fms/screens/homeComponents/sectionTitle.dart';
 import 'package:test_fms/screens/homeComponents/specialOffers.dart';
 import 'package:test_fms/screens/profile/profileScreen.dart';
 import 'package:test_fms/screens/quantityCalculater.dart';
+import '../screens/homeComponents/searchField.dart';
 import 'file:///C:/Users/4work/AndroidStudioProjects/test_fms/lib/screens/loginScreen/loginScreen.dart';
 import 'package:test_fms/screens/user/cartScreen.dart';
 import 'package:test_fms/screens/user/productInfo.dart';
@@ -33,6 +34,7 @@ class _homePageState extends State<HomePage> {
   FirebaseUser _logeedUser;
   int _tabBarIndex = 0;
   List<Products> _products = [];
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -69,13 +71,13 @@ class _homePageState extends State<HomePage> {
               },
               items: [
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.category_rounded), title: Text("Categories")),
+                    icon: Icon(Icons.category_rounded), label: "Categories"),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.calculate_sharp), title: Text("Calculator")),
+                    icon: Icon(Icons.calculate_sharp), label: "Calculator"),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.person), title: Text("Profile")),
+                    icon: Icon(Icons.person), label: "Profile"),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.logout), title: Text("Log out")),
+                    icon: Icon(Icons.logout), label: "Log out"),
               ],
             ),
             body: SafeArea(
@@ -86,6 +88,120 @@ class _homePageState extends State<HomePage> {
                     DiscountBanner(),
                     Categories(),
                     SpecialOffers(),
+                    StreamBuilder<QuerySnapshot>(
+                        stream: _store.loadProduct(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            List<Products> products = [];
+                            List<Products>  searchBar = [];
+                            for (var doc in snapshot.data.documents) {
+                              var data = doc.data;
+                              products.add(Products(
+                                pID: doc.documentID,
+                                pName: data[kProductName],
+                                pPrice: data[kProductPrice],
+                                pDescription: data[kProductDescription],
+                                pCategory: data[kProductCategory],
+                                pImageLocation: data[kProductLocation],
+                              ));
+                            }
+                            _products = [...products];
+                            products.clear();
+                            products = getAllProduct(_products);
+                            for(int i=0; i < products.length; i++){
+                              searchBar.add(products[i]);
+                            }
+                            SearchField.searchList = searchBar;
+                            String lighinthLimit(String name){
+                                if(name.length >= 19){
+                                  return "${name.substring(0,19)}..";
+                                }
+                                else{
+                                  return name;
+                                }
+                            }
+                            return GridView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, childAspectRatio: 0.9),
+                              itemBuilder: (context, index)
+                              {
+                                return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, ProductInfo.id,
+                                        arguments: products[index]);
+                                  },
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Positioned.fill(
+                                          child: Image(
+                                              fit: BoxFit.fill,
+                                              image:
+                                              AssetImage(products[index]
+                                                  .pImageLocation))),
+                                      Positioned(
+                                        bottom: 0,
+                                        child: Opacity(
+                                          opacity: 0.6,
+                                          child: Container(
+                                            width: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .width,
+                                            height: 60,
+                                            color: Colors.white,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(
+                                                  8.0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment
+                                                    .start,
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .only(right: 8.0),
+                                                    child: Text(
+                                                      lighinthLimit(
+                                                          products[index].pName),
+                                                      style:
+                                                      TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .w700),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'SAR ${products[index]
+                                                        .pPrice}',
+                                                    style:
+                                                    TextStyle(
+                                                        fontWeight: FontWeight
+                                                            .w700),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                              },
+                              itemCount: products.length,
+                            ); //return
+                          } else {
+                            return Center(
+                                child: Text(
+                                  'Loading data ...',
+                                  style: TextStyle(fontSize: 15),
+                                ));
+                          }
+                        })
                   ]),
                 ),
             ),
@@ -107,7 +223,7 @@ class _homePageState extends State<HomePage> {
   Widget ceramicViewer() {
     return StreamBuilder<QuerySnapshot>(
         stream: _store.loadProduct(),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<Products> products = [];
             for (var doc in snapshot.data.documents) {

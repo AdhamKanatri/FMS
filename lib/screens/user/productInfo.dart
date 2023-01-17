@@ -27,39 +27,35 @@ class _ProductInfoState extends State<ProductInfo> {
     Products product = ModalRoute.of(context).settings.arguments;
     total=product.pPrice;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.orange[50],
+        elevation: 0,
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            )),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, CartScreen.id);
+                },
+                child: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black,
+                )),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                color: Colors.orange[50],
-                height: SizeConfig.screenHeight*0.07,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.black,
-                              size: getProportionateScreenWidth(30),
-                            )),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, CartScreen.id);
-                            },
-                            child: Icon(
-                              Icons.shopping_cart,
-                              size: getProportionateScreenWidth(30),
-                            )),
-                      ]
-                  ),
-                ),
-              ),
               Container(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
@@ -397,7 +393,7 @@ class _ProductInfoState extends State<ProductInfo> {
                 height: high * 0.1,
                 child: Builder(
                   // ignore: deprecated_member_use
-                  builder: (context) => RaisedButton(
+                  builder: (context) => MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
@@ -450,13 +446,13 @@ class _ProductInfoState extends State<ProductInfo> {
     }
     if (exist) {
       // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('${product.pName} was add to cart before'),
       ));
     } else {
       cartItem.addProduct(product);
       // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('${product.pName} added to cart'),
       ));
     }

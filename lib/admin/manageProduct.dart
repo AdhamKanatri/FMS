@@ -30,7 +30,7 @@ class _EditProductState extends State<manageProduct> {
     ),
     child: StreamBuilder<QuerySnapshot>(
           stream: _store.loadProduct(),
-          builder: (context, snapshot) {
+          builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               List<Products> products = [];
               for (var doc in snapshot.data.documents) {

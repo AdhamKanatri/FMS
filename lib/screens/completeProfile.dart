@@ -77,7 +77,7 @@ class CompleteProfile extends StatelessWidget {
                                 builder: (context) => SizedBox(
                                   width: double.infinity,
                                   height: getProportionateScreenHeight(56),
-                                  child: FlatButton(
+                                  child: MaterialButton(
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(40)),
                                     onPressed: ()  {

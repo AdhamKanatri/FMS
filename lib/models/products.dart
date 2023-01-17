@@ -13,7 +13,6 @@ class Products {
       this.pQuantity});
 }
 
-
 class Product {
   final int id;
   final String title, description;

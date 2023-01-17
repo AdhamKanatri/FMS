@@ -184,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: double.infinity,
                           height: getProportionateScreenHeight(56),
                           // ignore: deprecated_member_use
-                          child: FlatButton(
+                          child: MaterialButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25)),
                             onPressed: () async {
@@ -319,20 +319,20 @@ class _LoginScreenState extends State<LoginScreen> {
               } on PlatformException catch (ex) {
                 modalHud.changeisLoading(false);
                 // ignore: deprecated_member_use
-                Scaffold.of(context)
+                ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(ex.message)));
               }
             }
 
           } on PlatformException catch (ex) {
             modalHud.changeisLoading(false);
-            Scaffold.of(context)
+            ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(ex.message)));
           } //End catch
         } else {
           modalHud.changeisLoading(false);
           // ignore: deprecated_member_use
-          Scaffold.of(context)
+          ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text("Wrong password")));
         } //End else
       } else {
@@ -342,7 +342,7 @@ class _LoginScreenState extends State<LoginScreen> {
         } on PlatformException catch (ex) {
           modalHud.changeisLoading(false);
           // ignore: deprecated_member_use
-          Scaffold.of(context)
+          ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(ex.message)));
         } //End catch
       }
@@ -357,7 +357,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await _auth.signInWithGoogle();
       Navigator.popAndPushNamed(context, HomePage.id);
     } on PlatformException catch (ex) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text(ex.message)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(ex.message)));
     }
   }
 

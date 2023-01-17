@@ -13,7 +13,7 @@ class OrderDetails extends StatelessWidget {
     String documentId = ModalRoute.of(context).settings.arguments;
     return StreamBuilder<QuerySnapshot>(
         stream: _store.loadOrdersDetails(documentId),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<Products> _products = [];
             for (var doc in snapshot.data.documents) {
@@ -85,7 +85,7 @@ class OrderDetails extends StatelessWidget {
                       children: <Widget>[
                         ButtonTheme(
                           buttonColor: Colors.blue,
-                          child: RaisedButton(
+                          child: MaterialButton(
                             onPressed: () {},
                             child: Text('Confirm order',
                                 style: TextStyle(
@@ -95,7 +95,7 @@ class OrderDetails extends StatelessWidget {
                         // ignore: deprecated_member_use
                         ButtonTheme(
                           buttonColor: Colors.redAccent,
-                          child: RaisedButton(
+                          child: MaterialButton(
                             onPressed: () {},
                             child: Text(
                               'Delete order',

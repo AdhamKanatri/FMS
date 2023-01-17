@@ -14,7 +14,7 @@ class OrderScreen extends StatelessWidget {
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
         stream: _store.loadOrders(),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(
               child: Text('There are no order'),

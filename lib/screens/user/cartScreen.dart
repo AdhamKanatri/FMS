@@ -12,6 +12,20 @@ class CartScreen extends StatelessWidget {
   static String id = 'CartScreen';
   @override
   Widget build(BuildContext context) {
+    String lighinthLimit(String name){
+      if(name.length >= 19){
+        return "${name.substring(0,18)}..";
+      }
+      else{
+        return name;
+      }
+    }
+    String totalPrice(String price, int quantity){
+      double totalPrice=double.parse(price) * quantity;
+      String total= '';
+      total =totalPrice.toStringAsFixed(1);
+      return total;
+    }
     List<Products> products = Provider.of<CartItem>(context).products;
     double high = MediaQuery.of(context).size.height;
     double wid = MediaQuery.of(context).size.width;
@@ -66,24 +80,24 @@ class CartScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 10),
+                                      padding: const EdgeInsets.only(left: 10, right: 10),
                                       child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text(
-                                              products[index].pName,
+                                              lighinthLimit(products[index].pName),
                                               style: TextStyle(
-                                                  fontSize: 20,
+                                                  fontSize: 15,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             SizedBox(
                                               height: high * 0.01,
                                             ),
                                             Text(
-                                              products[index].pPrice,
+                                              "${totalPrice(products[index].pPrice,products[index].pQuantity)} Riyal",
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 13,
                                                   fontWeight: FontWeight.bold),
                                             )
                                           ]),
@@ -120,7 +134,7 @@ class CartScreen extends StatelessWidget {
               minWidth: wid,
               height: high * 0.08,
               // ignore: deprecated_member_use
-              child: RaisedButton(
+              child: MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(20),
@@ -183,7 +197,7 @@ class CartScreen extends StatelessWidget {
               _store.storeOrders(
                   data: {kTotalPrice: price, kAddress: address, kProductCategory: category},
                   products: products);
-              Scaffold.of(context)
+              ScaffoldMessenger.of(context)
                   // ignore: deprecated_member_use
                   .showSnackBar(SnackBar(content: Text('Success Order')));
               Navigator.pop(context);
@@ -191,7 +205,7 @@ class CartScreen extends StatelessWidget {
               print(ex.message);
             }
           },
-          child: RaisedButton(
+          child: MaterialButton(
               disabledColor: primaryColor,
               child: Text('Confirm',style: TextStyle(color: Colors.white),)),
         )

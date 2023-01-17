@@ -40,7 +40,7 @@ class ProductType extends StatelessWidget {
   Widget ceramicViewer() {
     return StreamBuilder<QuerySnapshot>(
           stream: _store.loadProduct(),
-          builder: (context, snapshot) {
+          builder: (context, AsyncSnapshot snapshot) {
             String type = ModalRoute.of(context).settings.arguments;
             if (snapshot.hasData) {
               List<Products> products = [];

@@ -48,11 +48,11 @@ class _ProfileScreenState extends State<AdminProfile> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text("Orders")),
+              icon: Icon(Icons.person), label: "Orders"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text("My Profile")),
+              icon: Icon(Icons.person), label: "My Profile"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.logout), title: Text("Sign out")),
+              icon: Icon(Icons.logout), label: "Sign out"),
         ],
       ),
     );

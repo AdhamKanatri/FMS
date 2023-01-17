@@ -14,3 +14,15 @@ List<Products> getProductByCategory(
   }
   return products;
 }
+
+List<Products> getAllProduct(List<Products> allProduct) {
+  List<Products> products = [];
+  try {
+    for (var product in allProduct) {
+        products.add(product);
+    }
+  } on Error catch (ex) {
+    print(ex);
+  }
+  return products;
+}

@@ -29,7 +29,7 @@ class RoundedIconBtn extends StatelessWidget {
             ),
         ],
       ),
-      child: FlatButton(
+      child: MaterialButton(
         padding: EdgeInsets.zero,
         color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),

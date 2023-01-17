@@ -88,13 +88,13 @@ class HomePageState extends State<QuantityCalculotor> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.category_rounded), title: Text("Categories")),
+              icon: Icon(Icons.category_rounded), label: "Categories"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.calculate_sharp), title: Text("Calculator")),
+              icon: Icon(Icons.calculate_sharp), label: "Calculator"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text("Profile")),
+              icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.logout), title: Text("Log out")),
+              icon: Icon(Icons.logout), label: "Log out"),
         ],
       ),
       body: SafeArea(

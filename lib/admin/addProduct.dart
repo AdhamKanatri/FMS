@@ -83,7 +83,7 @@ class AddProduct extends StatelessWidget {
                           height: high * 0.02,
                         ),
                         // ignore: deprecated_member_use
-                        RaisedButton(
+                        MaterialButton(
                             onPressed: () {
                               if (_globalKey.currentState.validate()) {
                                 _globalKey.currentState.save();
